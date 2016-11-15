@@ -348,3 +348,37 @@
                      name值的)
                      getElementById()    //通过元素Id，唯一性
 ###28、.call() 和 .apply() 的作用和区别？
+         答：    
+                apply()函数有两个参数：第一个参数是上下文，第二个参数是参数组成的数组。如果上下文是null，则使用全局对象代替。
+                    如：function.apply(this,[1,2,3]);
+                call()的第一个参数是上下文，后续是实例传入的参数序列。
+                    如：function.call(this,1,2,3);
+###29、数组对象有哪些原生方法，列举一下？
+        答：    
+               赋值方法 （Mutator methods）
+               这些方法直接修改数组自身
+               
+               pop 和 push
+               shift 和 unshift
+               splice
+               reverse
+               sort
+          
+               访问方法（Accessor methods）
+               这些方法只是返回相应的结果，而不会修改数组本身
+               concat
+               join
+               slice
+               toString
+               indexOf 和 lastIndexOf *[ECMAScript 5] 
+ 
+               迭代方法（Iteration methods）
+               forEach *[ECMAScript 5]
+               map *[ECMAScript 5] 
+               filter *[ECMAScript 5] 
+               every 和 some *[ECMAScript 5] 
+               reduce 和 reduceRight *[ECMAScript 5] 
+               
+               性能测试
+               forEach
+###30、JavaScript中的作用域与变量声明提升？
