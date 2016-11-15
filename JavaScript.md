@@ -252,3 +252,99 @@
              Object.hasOwnProperty(proName)：是用来判断一个对象是否有你给出名称的属性或对象。不过需
              要注意的是，此方法无法检查该对象的原型链中是否具有该属性，该属性必须是对象本身的一个成员。
              判断对象是否有某个特定的属性。必须用字符串指定该属性。（例如，o.hasOwnProperty("name")）。
+###21、对JSON的了解？
+        答：
+             JSON中对象通过“{}”来标识，一个“{}”代表一个对象，如{“AreaId”:”123”}，对象的值是
+             键值对的形式（key：value）。
+             是js的一个严格的子集，一种轻量级的数据交换格式，类似于xml。数据格式简单，易于读写，占用带
+             宽小。两个函数：JSON.parse(str)<检查代码 str－－js对象>;JSON.stringify(obj);eval('('＋json
+             ＋')')<不会检查代码，会直接执行>
+###22、[].forEach.call($$("*"),function(a){ a.style.outline="1px solid #"+(~~(Math.random()*(1<<24))).toString(16)
+       }) 能解释一下这段代码的意思吗？
+        答：
+             获取页面中所有的元素，然后遍历每个元素，为元素的style属性增加一个颜色边框。\
+###23、js延迟加载的方式有哪些？
+        答：
+             js的延迟加载有助与提高页面的加载速度。
+             （1）使用setTimeout延迟方法的加载时间 $(function (){
+              setTimeout('A()', 1000); //延迟1秒
+              })
+             （2）让js最后加载
+               引入外部js脚本文件时，如果放入html的head中,则页面加载前该js脚本就会被加载入页面，而放入
+               body中，则会按照页面从上倒下的加载顺序来运行javascript的代码~~~ 所以我们可以把js外部引入的
+               文件放到页面底部，来让js最后引入，从而加快页面加载速度。
+              （3）上述方法2也会偶尔让你收到Google页面速度测试工具的“延迟加载javascript”警告。所以这里
+               的解决方案将是来自Google帮助页面的推荐方案。
+              
+              <script type="text/javascript">
+              //这些代码应被放置在</body>标签前(接近HTML文件底部)
+              function downloadJSAtOnload() {
+              var element = document.createElement("script");
+              element.src = "defer.js";
+              document.body.appendChild(element);
+              }
+              if (window.addEventListener)
+              window.addEventListener("load", downloadJSAtOnload, false);
+              else if (window.attachEvent)
+              window.attachEvent("onload", downloadJSAtOnload);
+              else window.onload = downloadJSAtOnload;
+              </script>
+              使用此段代码的步骤：
+              1）.复制上面代码
+              2）.粘贴代码到HTML的标签前 (靠近HTML文件底部)
+              3）.修改“defer.js”为你的外部JS文件名
+              4）.确保你文件路径是正确的。例如：如果你仅输入“defer.js”，那么“defer.js”文件一定与HTML
+              文件在同一文件夹下。
+###24、Ajax 是什么? 如何创建一个Ajax？
+        答：
+            （1）ajax的全称：Asynchronous Javascript And XML。所谓异步，在这里简单地解释就是：向服
+              务器发送请求的时候，我们不必等待结果，而是可以同时做其他的事情，等到有了结果它自己会根据设
+              定进行后续操作，与此同时，页面是不会发生整页刷新的，提高了用户体验。
+            （2）
+                (1)创建XMLHttpRequest对象,也就是创建一个异步调用对象 （考虑IE6的兼容性，newXMLHttp
+                Request（））;
+                (2)创建一个新的HTTP请求,并指定该HTTP请求的方法、URL及验证信息 （xhr.open("get"),
+                "example.php",true）;
+                (3)设置响应HTTP请求状态变化的函数
+                (4)发送HTTP请求
+                (5)获取异步调用返回的数据
+                (6)使用JavaScript和DOM实现局部刷新
+        注：
+           http请求过程：
+                 1、建立tcp连接。
+                 2、web浏览器向web服务器发送请求指令。
+                 3、web浏览器发送请求头信息。
+                 4、web服务器应答。
+                 5、web服务器发送应答头信息。
+                 6、web服务器向浏览器发送数据。
+                 7、web服务器关闭tcp连接。
+###25、同步和异步的区别?
+        答：
+                 同步的概念是os中：不同进程协同完成某项工作而先后次序调整（通过阻塞、唤醒等方式），同步强调的是顺序性，谁先
+                 谁后。。异步不存在顺序性。同步：浏览器访问服务器，用户看到页面刷新，重新发请求，等请求完，页面刷新，新内容
+                 出现，用户看到新内容之后进行下一步操作。异步：浏览器访问服务器请求，用户正常操作，浏览器在后端进行请求。等
+                 请求完，也买你不刷新，新内容也会出现，永辉看到新内容。
+###26、如何解决跨域问题?
+        答：
+                 同源策略：在同一个域名下或者同一域名不同文件夹，只有这两个是允许通信的。
+           特别注意两点：
+                 第一，如果是协议和端口造成的跨域问题“前台”是无能为力的，
+                 第二：在跨域问题上，域仅仅是通过“URL的首部”来识别而不会去尝试判断相同的ip地址对应着两个
+                域或两个域是否在同一个ip上
+###27、DOM操作——怎样添加、移除、移动、复制、创建和查找节点? 
+        答： 
+                （1）添加、移除、移动、复制
+                   appendChild()
+                   removeChild()
+                   ('要移动到的位置).append($('要移动的标签文件等'))
+                   ('复制到的位置').append( $('要复制的文件').clone(保留原有文件))
+                （2）创建一个新节点
+                      createDocumentFragment()    //创建一个DOM片段
+                      createElement()   //创建一个具体的元素
+                      createTextNode() 
+                （3）查找一个结点
+                     getElementsByTagName()    //通过标签名称
+                     getElementsByName()    //通过元素的Name属性的值(IE容错能力较强，会得到一个数组，其中包括id等于
+                     name值的)
+                     getElementById()    //通过元素Id，唯一性
+###28、.call() 和 .apply() 的作用和区别？
