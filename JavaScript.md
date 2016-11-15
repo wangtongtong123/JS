@@ -187,12 +187,68 @@
               radix：数字2-36之前的整型。默认使用10，表示十进制。需要注意的是，如果radix在2-36之外会返回NaN。
              （2）map函数：arr.map(callback[,thisArg]);
 ###14、关于事件，IE与火狐的事件机制有什么区别？ 如何阻止冒泡？
-       答：    
+        答：    
               IE为事件冒泡，Firefox同时支持事件捕获和冒泡事件。但并非所有浏览器都支持事件捕获。jQuery中使用
               event.stopPropagation()方法可阻止冒泡;（旧ie的方法 ev.cancelBubble = true;）
 ###15、什么是闭包（closure），为什么要用它？
-       答：
+        答：
               闭包指的是一个函数可以访问另一个函数作用域中变量的函数。常见的构造方法，是在一个函数内部定义另外一个函数。内部函数
               可以引用外层的参数和变量；参数和变量不会被垃圾回收机制回收。注意，闭包的原理是作用域链，所以闭包访问的上级作用域中
               的变量是个对象，其值为其运算结束后的最后一个值。除非用立即执行函数来解决。
+###16、javascript 代码中的"use strict";是什么意思 ? 使用它区别是什么？
+        答：
+              除了正常模式运行外，ECMAscript添加了第二种运行模式：“严格模式”。
+           区别：
+             （1）消除js不合理，不严谨地方，减少怪异行为
+             （2）消除代码运行的不安全之处，
+             （3）提高编译器的效率，增加运行速度
+             （4）为未来的js新版本做铺垫。
+###17、如何判断一个对象是否属于某个类？
+        答：
+              使用instanceof 即if(a instanceof Person){alert('yes');}
+###18、new操作符具体干了什么呢?
+        答：
+              1、创建一个空对象，并且 this 变量引用该对象，同时还继承了该函数的原型。p._proto_ =Base.prototype;
+              2、属性和方法被加入到 this 引用的对象中。Base.call(p/this)
+              3、新创建的对象由 this 所引用，并且最后隐式的返回 this 。
+###19、用原生JavaScript的实现过什么功能吗？
+        答：
+            （1）显示和隐藏
+             jq：
+             $(el).show();
+             $(el).hide();
 
+             js：
+             el.style.display = '';
+             el.style.display = 'none';
+            （2）淡入淡出
+             jq：$(el).fadeIn();　　
+             js：function fadeIn(el) {
+             var opacity = 0;
+
+             el.style.opacity = 0;
+             el.style.filter = '';
+
+             var last = +new Date();
+             var tick = function() {
+             opacity += (new Date() - last) / 400;
+             el.style.opacity = opacity;
+             el.style.filter = 'alpha(opacity=' + (100 * opacity)|0 + ')';
+
+             last = +new Date();
+
+             if (opacity < 1) {  
+             (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick,
+             16);
+             }
+             };
+
+             tick();
+             }
+
+             fadeIn(el);
+###20、Javascript中，有一个函数，执行时对象查找时，永远不会去查找原型，这个函数是？
+        答：
+             Object.hasOwnProperty(proName)：是用来判断一个对象是否有你给出名称的属性或对象。不过需
+             要注意的是，此方法无法检查该对象的原型链中是否具有该属性，该属性必须是对象本身的一个成员。
+             判断对象是否有某个特定的属性。必须用字符串指定该属性。（例如，o.hasOwnProperty("name")）。
